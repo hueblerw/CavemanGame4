@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class Support {
 
@@ -240,4 +241,57 @@ public class Support {
         }
     }
 
+    public static string SetDirection(Vector3 direction)
+    {
+        string output = "none";
+        switch ((int)direction.z)
+        {
+            case 0:
+                output = "left";
+                break;
+            case 1:
+                output = "right";
+                break;
+            case 2:
+                output = "down";
+                break;
+            case 3:
+                output = "up";
+                break;
+        }
+
+        return output;
+    }
+
+    public static string setReverseDirection(string direction)
+    {
+        switch (direction)
+        {
+            case "left":
+                return "right";
+            case "right":
+                return "left";
+            case "down":
+                return "up";
+            case "up":
+                return "down";
+        }
+        throw new Exception("Asking for a reverse direction, but [" + direction + "] not a valid direction!");
+    }
+
+    public static Vector2 directionToCoor(string direction, int x, int z)
+    {
+        switch (direction)
+        {
+            case "left":
+                return new Vector2(x - 1, z);
+            case "right":
+                return new Vector2(x + 1, z);
+            case "down":
+                return new Vector2(x, z - 1);
+            case "up":
+                return new Vector2(x, z + 1);
+        }
+        throw new Exception("Asking for a reverse direction, but [" + direction + "] not a valid direction!");
+    }
 }

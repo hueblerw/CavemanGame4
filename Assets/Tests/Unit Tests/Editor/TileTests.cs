@@ -59,6 +59,7 @@ public class TileTests {
         {
             for (int j = 0; j < z; j++)
             {
+             
                 array[i, j] = worldArray[i, j].getLowTemp();
                 assertBetween(array[i, j], -20, 70);
                 Assert.LessOrEqual(array[i, j].ToString().Length, 3);

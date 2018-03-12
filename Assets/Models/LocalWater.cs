@@ -14,7 +14,7 @@ public class LocalWater
         upstreamDirections = new List<string>();
     }
 
-    public void setStats(string downstream, double soilAbsortion, double flowRateMultiplier)
+    public void setStats(string downstream, double soilAbsorption, double flowRateMultiplier)
     {
         downstreamDirection = downstream;
         this.soilAbsorption = soilAbsorption;
@@ -24,6 +24,26 @@ public class LocalWater
     public void addUpstreamDirection(string direction)
     {
         upstreamDirections.Add(direction);
+    }
+
+    public double getFlowRateMultiplier()
+    {
+        return flowRateMultiplier;
+    }
+
+    public double getSoilAbsorption()
+    {
+        return soilAbsorption;
+    }
+
+    public string getDownstreamDirection()
+    {
+        return downstreamDirection;
+    }
+
+    public List<string> getUpstreamDirections()
+    {
+        return upstreamDirections;
     }
 
 }

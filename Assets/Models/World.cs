@@ -303,50 +303,12 @@ public class World {
                 {
                     index = randy.Next(0, downhills.Length);
                 }
-                downstreamDirection = SetDirection(downhills[index]);
+                downstreamDirection = Support.SetDirection(downhills[index]);
                 worldArray[x, z].initializeLocalWater(downstreamDirection, CalculateSoilAbsorption(x, z), flowRateMultiplier);
                 // add reverse direction to tile in same direction of you flow
-                worldArray[(int) coor[index].x, (int) coor[index].z].getLocalWater().addUpstreamDirection(setReverseDirection(downstreamDirection));
+                worldArray[(int) coor[index].x, (int) coor[index].z].getLocalWater().addUpstreamDirection(Support.setReverseDirection(downstreamDirection));
             }
         }
-    }
-
-    private string SetDirection(Vector3 direction)
-    {
-        string output = "none";
-        switch ((int)direction.z)
-        {
-            case 0:
-                output = "left";
-                break;
-            case 1:
-                output = "right";
-                break;
-            case 2:
-                output = "down";
-                break;
-            case 3:
-                output = "up";
-                break;
-        }
-
-        return output;
-    }
-
-    private string setReverseDirection(string direction)
-    {
-        switch (direction)
-        {
-            case "left":
-                return "right";
-            case "right":
-                return "left";
-            case "down":
-                return "up";
-            case "up":
-                return "down";
-        }
-        throw new Exception("Asking for a reverse direction, but [" + direction + "] not a valid direction!");
     }
 
     private double CalculateSoilAbsorption(int x, int z)
