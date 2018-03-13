@@ -42,7 +42,8 @@ public class LocalWaterTests {
             for (int j = 0; j < z; j++)
             {
                 string direction = worldArray[i, j].getLocalWater().getDownstreamDirection();
-                if (direction != "none")
+                // null is a ocean, none is a lake
+                if (direction != null && direction != "none")
                 {
                     Vector2 coor = Support.directionToCoor(direction, i, j);
                     Assert.GreaterOrEqual(worldArray[(int)coor.x, (int)coor.y].getElevation(), worldArray[i, j].getElevation());
@@ -88,10 +89,12 @@ public class LocalWaterTests {
             for(int j = 0; j < z; j++)
             {
                 assertBetween(worldArray[i, j].getLocalWater().getFlowRateMultiplier(), 0.0, 1.0);
-                assertBetween(worldArray[i, j].getLocalWater().getSoilAbsorption(), 0.0, 2.0);
+                assertBetween(worldArray[i, j].getLocalWater().getSoilAbsorption(), 0.0, 1.2);
             }
         }
     }
+    
+    // make another test that prints the results of a 10x10 world downstream and upstream values
 
     private void assertBetween(double num, double v1, double v2)
     {
