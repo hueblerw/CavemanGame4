@@ -95,6 +95,13 @@ public class LocalWaterTests {
     }
     
     // make another test that prints the results of a 10x10 world downstream and upstream values
+    [Test]
+    public void visualCompareUpDownstream()
+    {
+        World worldTest = World.generateWorld(10, 10, false);
+        Tile[,] array = worldTest.getWorldArray();
+       
+    }
 
     private void assertBetween(double num, double v1, double v2)
     {
