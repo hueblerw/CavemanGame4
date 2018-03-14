@@ -57,7 +57,12 @@ public class ArrayPrinter {
             {
                 for (int k = 0; k < array[i,j].Count; k++)
                 {
-                    output += array[i, j][k] + " ";
+                    if (array[i,j][k] == null){
+                        output += "- ";
+                    }
+                    else {
+                        output += array[i, j][k] + " ";
+                    }
                 }
             }
             output += "\n";

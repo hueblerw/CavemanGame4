@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System;
 
+// Get these off floats and to doubles
+
 public class Support {
 
     private static System.Random randy = new System.Random();
@@ -22,6 +24,7 @@ public class Support {
         return cells;
     }
 
+// up and down are consistently switch to fit a n upside down view.  this is confusing. reverse it back consistently
     public static List<string> getDirectionAsStringBelow(bool diagonals, int x, int z, int WorldX, int WorldZ, float testValue, float[,] array)
     {
         List<string> cellList = new List<string>();
@@ -176,7 +179,7 @@ public class Support {
         return coor.ToArray();
     }
 
-
+// switch up down here
     public static List<Vector3> GetCardinalCoordinatesAround(int x, int z, int X, int Z)
     {
         List<Vector3> coor = new List<Vector3>();
@@ -241,6 +244,7 @@ public class Support {
         }
     }
 
+// and here
     public static string SetDirection(Vector3 direction)
     {
         string output = "none";
@@ -279,6 +283,7 @@ public class Support {
         throw new Exception("Asking for a reverse direction, but [" + direction + "] not a valid direction!");
     }
 
+// and here
     public static Vector2 directionToCoor(string direction, int x, int z)
     {
         switch (direction)
@@ -292,6 +297,6 @@ public class Support {
             case "up":
                 return new Vector2(x, z + 1);
         }
-        throw new Exception("Asking for a reverse direction, but [" + direction + "] not a valid direction!");
+        throw new Exception("Given direction [" + direction + "] is not a valid direction to for which to find coordinates!");
     }
 }
