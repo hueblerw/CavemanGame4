@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class ArrayPrinter {
 
@@ -27,6 +26,39 @@ public class ArrayPrinter {
             for (int j = 0; j < array.GetLength(1); j++)
             {
                 output += array[i, j].ToString() + " ";
+            }
+            output += "\n";
+        }
+        Debug.Log(output);
+    }
+
+    public static void print(string[,] array, string titleMessage)
+    {
+        Debug.Log(titleMessage + "\n\n");
+        string output = "";
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                output += array[i, j].ToString() + " ";
+            }
+            output += "\n";
+        }
+        Debug.Log(output);
+    }
+
+    public static void print(List<string>[,] array, string titleMessage)
+    {
+        Debug.Log(titleMessage + "\n\n");
+        string output = "";
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                for (int k = 0; k < array[i,j].Count; k++)
+                {
+                    output += array[i, j][k] + " ";
+                }
             }
             output += "\n";
         }
