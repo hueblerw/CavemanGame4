@@ -98,9 +98,23 @@ public class LocalWaterTests {
     [Test]
     public void visualCompareUpDownstream()
     {
-        World worldTest = World.generateWorld(10, 10, false);
-        Tile[,] array = worldTest.getWorldArray();
-       
+        World worldTest = World.generateNewWorld(10, 10, false);
+        Tile[,] worldArray = worldTest.getWorldArray();
+        double[,] elevationArray = new double[10, 10];
+        string[,] downArray = new string[10, 10];
+        List<string>[,] upArray = new List<string>[10, 10];
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                elevationArray[i, j] = worldArray[i, j].getElevation();
+                downArray[i, j] = worldArray[i, j].getLocalWater().getDownstreamDirection();
+                upArray[i, j] = worldArray[i, j].getLocalWater().getUpstreamDirections();
+            }
+        }
+        ArrayPrinter.print(elevationArray, "Elevation Map: ");
+        ArrayPrinter.print(downArray, "Downstream Map:");
+        ArrayPrinter.print(upArray, "Upstream Map:");
     }
 
     private void assertBetween(double num, double v1, double v2)
