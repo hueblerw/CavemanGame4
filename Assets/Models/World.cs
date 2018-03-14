@@ -276,7 +276,8 @@ public class World {
     {
         if (worldArray[x, z].getOceanPercent() == 1.00)
         {
-            worldArray[x, z].initializeLocalWater("none", 1.0, 0.0);
+            // null is ocean, none is lake
+            worldArray[x, z].initializeLocalWater(null, 1.0, 0.0);
         }
         else
         {
@@ -295,7 +296,7 @@ public class World {
             Vector3[] downhills = coor.ToArray();
             // Choose a random downstream IF there is a choice
             string downstreamDirection = "none";
-            double flowRateMultiplier = 1.0;
+            double flowRateMultiplier = 1.0;  // TODO: in future do math here
             if (downhills.Length != 0)
             {
                 int index = 0;
