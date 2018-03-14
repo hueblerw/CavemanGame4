@@ -286,7 +286,7 @@ public class World {
             int len = coor.Count;
             for (int v = 0; v < coor.Count; v++)
             {
-                // Debug.Log(worldArray[(int)coor[v].x, (int)coor[v].y].elevation + " >= " + worldArray[x, z].elevation);
+                Debug.Log(worldArray[(int)coor[v].x, (int)coor[v].y].elevation + " >= " + worldArray[x, z].elevation);
                 if (worldArray[(int)coor[v].x, (int)coor[v].y].getElevation() >= worldArray[x, z].getElevation())
                 {
                     coor.Remove(coor[v]);
