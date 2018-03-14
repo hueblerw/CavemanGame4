@@ -72,6 +72,20 @@ public class WorldTests {
         sw.Stop();
         UnityEngine.Debug.Log("World of size " + x + ", " + z + " took " + sw.Elapsed + " secs.");
     }
+    
+    // move this higher up
+    [Test]
+    public void negativeElevationHasSomeOcean()
+    {
+        Tile[,] array = World.getWorld().getWorldArray();
+        for (int i = 0; i < x; i++){
+            for (int j = 0; j < z; j++){
+                if(arrray[i,j].getElevation() < 0.0)){
+                    Assert.LessThan(array[i,j]. getElevation(), 0.0);
+                }
+            }
+        }
+    }
 
     // PRIVATE METHODS
 
