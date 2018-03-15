@@ -307,7 +307,7 @@ public class World {
                 downstreamDirection = Support.SetDirection(downhills[index]);
                 worldArray[x, z].initializeLocalWater(downstreamDirection, CalculateSoilAbsorption(x, z), flowRateMultiplier);
                 // add reverse direction to tile in same direction of you flow
-                worldArray[(int) coor[index].x, (int) coor[index].z].getLocalWater().addUpstreamDirection(Support.setReverseDirection(downstreamDirection));
+                worldArray[(int) coor[index].x, (int) coor[index].y].getLocalWater().addUpstreamDirection(Support.setReverseDirection(downstreamDirection));
             }
         }
     }
