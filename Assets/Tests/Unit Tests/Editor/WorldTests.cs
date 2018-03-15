@@ -32,6 +32,26 @@ public class WorldTests {
         ArrayPrinter.print(layer, "Test Layer: ");
     }
 
+    // move this higher up
+    [Test]
+    public void negativeElevationHasSomeOcean()
+    {
+        int x = 50;
+        int z = 40;
+        World testWorld = World.generateNewWorld(x, z, false);
+        Tile[,] array = World.getWorld().getWorldArray();
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < z; j++)
+            {
+                if (array[i, j].getElevation() < 0.0)
+                {
+                    Assert.Less(array[i, j].getElevation(), 0.0);
+                }
+            }
+        }
+    }
+
     [Test]
     public void GenerateSmallSymmetricWorld()
     {
@@ -71,20 +91,6 @@ public class WorldTests {
         World testWorld = World.generateNewWorld(x, z, false);
         sw.Stop();
         UnityEngine.Debug.Log("World of size " + x + ", " + z + " took " + sw.Elapsed + " secs.");
-    }
-    
-    // move this higher up
-    [Test]
-    public void negativeElevationHasSomeOcean()
-    {
-        Tile[,] array = World.getWorld().getWorldArray();
-        for (int i = 0; i < x; i++){
-            for (int j = 0; j < z; j++){
-                if(arrray[i,j].getElevation() < 0.0)){
-                    Assert.LessThan(array[i,j]. getElevation(), 0.0);
-                }
-            }
-        }
     }
 
     // PRIVATE METHODS

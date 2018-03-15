@@ -40,7 +40,14 @@ public class ArrayPrinter {
         {
             for (int j = 0; j < array.GetLength(1); j++)
             {
-                output += array[i, j].ToString() + " ";
+                if (array[i, j] == null)
+                {
+                    output += "- ";
+                }
+                else
+                {
+                    output += array[i, j].ToString() + " ";
+                }
             }
             output += "\n";
         }
@@ -57,7 +64,7 @@ public class ArrayPrinter {
             {
                 for (int k = 0; k < array[i,j].Count; k++)
                 {
-                    if (array[i,j][k] == null){
+                    if (array[i, j][k] == null){
                         output += "- ";
                     }
                     else {
