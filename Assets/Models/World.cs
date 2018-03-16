@@ -297,6 +297,8 @@ public class World {
             // Choose a random downstream IF there is a choice
             string downstreamDirection = "none";
             double flowRateMultiplier = 1.0;  // TODO: in future do math here
+            // decide what slope will == 1.0
+            // based current elevation - next tiles elevation
             if (downhills.Length != 0)
             {
                 int index = 0;
