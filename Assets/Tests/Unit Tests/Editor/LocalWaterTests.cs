@@ -27,7 +27,6 @@ public class LocalWaterTests {
                 }
             }
         }
-        Assert.AreEqual(true, false);
 	}
 
     [Test]
@@ -48,7 +47,7 @@ public class LocalWaterTests {
                 if (direction != null && direction != "none")
                 {
                     Vector2 coor = Support.directionToCoor(direction, i, j);
-                    //Assert.GreaterOrEqual(worldArray[(int)coor.x, (int)coor.y].getElevation(), worldArray[i, j].getElevation());
+                    Assert.GreaterOrEqual(worldArray[i, j].getElevation(), worldArray[(int)coor.x, (int)coor.y].getElevation());
                 }
             }
         }
