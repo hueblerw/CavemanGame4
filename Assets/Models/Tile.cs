@@ -16,6 +16,7 @@ public class Tile {
     // Local variable stats
     // private Habitat habitat;
     private LocalWater localwater;
+    private HashMap<string, List<object[]>> tileHistory;
 
     private System.Random randy = new System.Random();
 
@@ -33,14 +34,14 @@ public class Tile {
         localwater = new LocalWater();
     }
 
-    public int[] generateYearOfTemps()
+    public void generateYearOfTemps()
     {
         int[] temps = new int[World.DAYS_PER_YEAR];
-        for (int d = 0; d <= World.DAYS_PER_YEAR; d++)
+        for (int d = 0; d < World.DAYS_PER_YEAR; d++)
         {
             temps[d] = tempEquation.generateTodaysTemp(d, randy);
         }
-        return temps;
+        addToHistory("temps", temps);
     }
 
     public double getElevation()
@@ -101,6 +102,25 @@ public class Tile {
     public void setHillPercent(double hillPercent)
     {
         this.hillPercent = Math.Round(hillPercent, 2);
+    }
+
+    // this wont work but it is an example of the desired behavior
+    private void addToHistory(string key, object[] array)
+    {
+        if (tileHistory.get(key) == null)
+        {
+            tileHistory.put(key, new List<array.Class>();
+        }
+        // 20 should he stored as a constant in habitat or tile memory
+        if (tileHistory.get(key).Count < 20)
+        {
+            tileHistory.get(key).add(array);
+        }
+        else
+        {
+            tileHistory.get(key)[0].remove();
+            tileHistory.get(key).add(array);
+        }
     }
 
 }
