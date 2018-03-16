@@ -16,7 +16,7 @@ public class Tile {
     // Local variable stats
     // private Habitat habitat;
     private LocalWater localwater;
-    private HashMap<string, List<object[]>> tileHistory;
+    private Dictionary<string, List<object[]>> tileHistory;
 
     private System.Random randy = new System.Random();
 
@@ -104,14 +104,14 @@ public class Tile {
         this.hillPercent = Math.Round(hillPercent, 2);
     }
 
-    // this wont work but it is an example of the desired behavior
+    // this wont work but it is an example of the desired behavior - probably make 2 methods of same name is simplest
     private void addToHistory(string key, object[] array)
     {
         if (tileHistory.get(key) == null)
         {
             tileHistory.put(key, new List<array.Class>();
         }
-        // 20 should he stored as a constant in habitat or tile memory
+        // 20 should be stored as a constant in habitat or tile memory
         if (tileHistory.get(key).Count < 20)
         {
             tileHistory.get(key).add(array);
