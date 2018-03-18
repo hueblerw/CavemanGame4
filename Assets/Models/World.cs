@@ -48,11 +48,11 @@ public class World {
         UpdateOceanAndHillPercents();
         // Generate River numbers that require hillPercents and elevations
         CalculateAllFlows();
-        // generate 20 years of habitats - can be done in parallel
+        // generate 20 years of habitats - is done in parallel
         // This will be inside a for loop for the number of years to generate
         // May as well stash what is used to initially generate habitata
         // That number should be a const in Habitat
-        for(int year = 0; year < 1; year++)
+        for (int year = 0; year < 20; year++)
         {
             GenerateWorldTemps();
         }
@@ -73,7 +73,7 @@ public class World {
         }
     }
 
-private void GenerateWorldTemps()
+    private void GenerateWorldTemps()
     {
         // syncronously first, but theoretically all river initialization can be down asyncronously if necessary
         for (int x = 0; x < X; x++)

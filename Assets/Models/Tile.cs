@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Tile {
 
@@ -16,9 +17,9 @@ public class Tile {
     // Local variable stats
     // private Habitat habitat;
     private LocalWater localwater;
-    private Dictionary<string, List<object[]>> tileHistory;
-
-    private System.Random randy = new System.Random();
+    private List<int[]> tempHistory;
+    private Dictionary<string, List<double[]>> waterHistory;
+    private System.Random randy;
 
 	public Tile(double elevation, double lowTemp, double highTemp, double midpoint, double variance, Humidity humidity)
     {
@@ -32,6 +33,8 @@ public class Tile {
         tempEquation = new TempEquation(this.highTemp, this.lowTemp, midpoint, variance);
         randy = new System.Random();
         localwater = new LocalWater();
+        tempHistory = new List<int[]>();
+        waterHistory = new Dictionary<string, List<double[]>>();
     }
 
     public void generateYearOfTemps()
@@ -41,7 +44,12 @@ public class Tile {
         {
             temps[d] = tempEquation.generateTodaysTemp(d, randy);
         }
-        addToHistory("temps", temps);
+        addTempsToHistory(temps);
+    }
+
+    public void generateYearOfRainAndSnow()
+    {
+
     }
 
     public double getElevation()
@@ -104,22 +112,34 @@ public class Tile {
         this.hillPercent = Math.Round(hillPercent, 2);
     }
 
-    // this wont work but it is an example of the desired behavior - probably make 2 methods of same name is simplest
-    private void addToHistory(string key, object[] array)
+    private void addTempsToHistory(int[] array)
     {
-        if (tileHistory.get(key) == null)
-        {
-            tileHistory.put(key, new List<array.Class>();
-        }
         // 20 should be stored as a constant in habitat or tile memory
-        if (tileHistory.get(key).Count < 20)
+        if (tempHistory.Count < 20)
         {
-            tileHistory.get(key).add(array);
+            tempHistory.Add(array);
         }
         else
         {
-            tileHistory.get(key)[0].remove();
-            tileHistory.get(key).add(array);
+            tempHistory.RemoveAt(0);
+            tempHistory.Add(array);
+        }
+    }
+
+    private void addToWaterHistory(string key, double[] array)
+    {
+        if (waterHistory[key] == null)
+        {
+            waterHistory[key] = new List<double[]>();
+        }
+        if (waterHistory[key].Count < 20)
+        {
+            waterHistory[key].Add(array);
+        }
+        else
+        {
+            waterHistory[key].RemoveAt(0);
+            waterHistory[key].Add(array);
         }
     }
 
