@@ -51,8 +51,8 @@ public class World {
         // generate 20 years of habitats - is done in parallel
         // This will be inside a for loop for the number of years to generate
         // May as well stash what is used to initially generate habitata
-        // That number should be a const in Habitat
-        for (int year = 0; year < 20; year++)
+        // That number should be a const in Habitat = 20
+        for (int year = 0; year < 1; year++)
         {
             GenerateWorldTemps();
         }
