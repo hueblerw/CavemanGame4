@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 public class TileTests {
@@ -59,7 +60,7 @@ public class TileTests {
         {
             for (int j = 0; j < z; j++)
             {
-             
+
                 array[i, j] = worldArray[i, j].getLowTemp();
                 assertBetween(array[i, j], -20, 70);
                 Assert.LessOrEqual(array[i, j].ToString().Length, 3);
@@ -128,9 +129,9 @@ public class TileTests {
             for (int j = 0; j < z; j++)
             {
                 array[i, j] = worldArray[i, j].getHumidity();
-                for(int k = 0; k < array[i, j].getSegments().Length; k++)
+                for (int k = 0; k < array[i, j].getSegments().Length; k++)
                 {
-                    if(k == 4)
+                    if (k == 4)
                     {
                         example[i, j] = array[i, j].getSegments()[k];
                     }
@@ -141,6 +142,80 @@ public class TileTests {
         }
         ArrayPrinter.print(example, "Sample Humidity Map:");
         // VerifyWorld();
+    }
+
+    [Test]
+    public void generateYearOfTempsTest()
+    {
+        int x = 40;
+        int z = 40;
+        World testWorld = World.generateNewWorld(x, z, false);
+        Tile tile = World.getWorld().getWorldArray()[0, 0];
+        Stopwatch sw = Stopwatch.StartNew();
+        sw.Start();
+        tile.generateYearOfTemps();
+        sw.Stop();
+        UnityEngine.Debug.Log("Generation of a year of temperatures " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
+        UnityEngine.Debug.Log("Note: World Size should have no effect on the time run of this method.");
+    }
+
+    [Test]
+    public void generateYearOfRainAndSnowTest()
+    {
+        int x = 40;
+        int z = 40;
+        World testWorld = World.generateNewWorld(x, z, false);
+        Tile tile = World.getWorld().getWorldArray()[0, 0];
+        Stopwatch sw = Stopwatch.StartNew();
+        sw.Start();
+        tile.generateYearOfRainAndSnow();
+        sw.Stop();
+        UnityEngine.Debug.Log("Generation of a year of temperatures " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
+        UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
+    }
+
+    [Test]
+    public void generateWorldsYearOfTempsTest()
+    {
+        // syncronously first, but theoretically all river initialization can be down asyncronously if necessary
+        int x = 40;
+        int z = 40;
+        World testWorld = World.generateNewWorld(x, z, false);
+        Tile[,] worldArray = World.getWorld().getWorldArray();
+        Stopwatch sw = Stopwatch.StartNew();
+        sw.Start();
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < z; j++)
+            {
+                worldArray[i, j].generateYearOfTemps();
+            }
+        }
+        sw.Stop();
+        UnityEngine.Debug.Log("Generation of an entire year's worth of temperatures " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
+        UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
+    }
+
+    [Test]
+    public void generateWorldsYearOfRainAndSnowTest()
+    {
+        // syncronously first, but theoretically all river initialization can be down asyncronously if necessary
+        int x = 40;
+        int z = 40;
+        World testWorld = World.generateNewWorld(x, z, false);
+        Tile[,] worldArray = World.getWorld().getWorldArray();
+        Stopwatch sw = Stopwatch.StartNew();
+        sw.Start();
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < z; j++)
+            {
+                worldArray[i, j].generateYearOfRainAndSnow();
+            }
+        }
+        sw.Stop();
+        UnityEngine.Debug.Log("Generation of an entire year's worth of temperatures " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
+        UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
     }
 
     private void assertBetween(double num, double v1, double v2)
