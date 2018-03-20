@@ -196,28 +196,6 @@ public class TileTests {
         UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
     }
 
-    [Test]
-    public void generateWorldsYearOfRainAndSnowTest()
-    {
-        // syncronously first, but theoretically all river initialization can be down asyncronously if necessary
-        int x = 40;
-        int z = 40;
-        World testWorld = World.generateNewWorld(x, z, false);
-        Tile[,] worldArray = World.getWorld().getWorldArray();
-        Stopwatch sw = Stopwatch.StartNew();
-        sw.Start();
-        for (int i = 0; i < x; i++)
-        {
-            for (int j = 0; j < z; j++)
-            {
-                worldArray[i, j].generateYearOfRainAndSnow();
-            }
-        }
-        sw.Stop();
-        UnityEngine.Debug.Log("Generation of an entire year's worth of temperatures " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
-        UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
-    }
-
     private void assertBetween(double num, double v1, double v2)
     {
         Assert.LessOrEqual(num, v2);

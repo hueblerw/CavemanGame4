@@ -23,6 +23,11 @@ public class Humidity {
         return segments;
     }
 
+    public double getSegment(int index)
+    {
+        return segments[index];
+    }
+
     public double getHumidityForDay(int day)
     {
         return 0.0;

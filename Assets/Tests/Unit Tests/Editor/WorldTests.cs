@@ -93,6 +93,25 @@ public class WorldTests {
         UnityEngine.Debug.Log("World of size " + x + ", " + z + " took " + sw.Elapsed + " secs.");
     }
 
+    [Test]
+    public void generateWorldsYearOfRainTest()
+    {
+        // syncronously first, but theoretically all river initialization can be down asyncronously if necessary
+        int x = 40;
+        int z = 40;
+        World testWorld = World.generateNewWorld(x, z, false);
+        Tile[,] worldArray = World.getWorld().getWorldArray();
+        Stopwatch sw = Stopwatch.StartNew();
+        sw.Start();
+        for (int day = 0; day < World.DAYS_PER_YEAR; day++)
+        {
+            RainGenerator.getInstance().GenerateWorldsDayOfRain(day);
+        }
+        sw.Stop();
+        UnityEngine.Debug.Log("Generation of an entire year's worth of rain " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
+        UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
+    }
+
     // PRIVATE METHODS
 
     private void VerifyWorld(World world)
