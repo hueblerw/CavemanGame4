@@ -9,6 +9,7 @@ public class RainGenerator {
     private int X;
     private int Z;
     private Random randy;
+    private Tile[,] world;
 
     // Constants
     private const double SPAWN_MULT = .25 * 100.0;
@@ -37,6 +38,7 @@ public class RainGenerator {
         this.X = X;
         this.Z = Z;
         randy = new Random();
+        world = World.getWorld().getWorldArray();
     }
 
     // World Rainfall Generation Methods
@@ -199,7 +201,6 @@ public class RainGenerator {
     private double getHumidityFromArray(int arrayNum, int remainder, int x, int z)
     {
         // Use the linear equation formula to find today's humidity
-        Tile[,] world = World.getWorld().getWorldArray();
         // Is this formula correct???
         // will save time to simplify the formula:  humidity - humidity * (remainder / NumofDays) + humidity => (2 + (remainder / NumofDays)) * humidity
         double humidity = (world[x, z].getHumidity().getSegment(arrayNum) - world[x, z].getHumidity().getSegment(arrayNum)) * (remainder / DAYS_PER_HUMIDITY_ARRAY_NUM) + world[x, z].getHumidity().getSegment(arrayNum);

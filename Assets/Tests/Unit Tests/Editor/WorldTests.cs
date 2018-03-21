@@ -97,8 +97,8 @@ public class WorldTests {
     public void generateWorldsYearOfRainTest()
     {
         // syncronously first, but theoretically all river initialization can be down asyncronously if necessary
-        int x = 40;
-        int z = 40;
+        int x = 100;
+        int z = 100;
         World testWorld = World.generateNewWorld(x, z, false);
         Tile[,] worldArray = World.getWorld().getWorldArray();
         Stopwatch sw = Stopwatch.StartNew();
