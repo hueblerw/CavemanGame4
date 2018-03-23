@@ -44,6 +44,11 @@ public class World {
         // Build the primary layers - all can be generated asyncronously
         // *** Start syncronously *** - not worth changing to async.
         worldArray = CreatePrimaryWorldArray();
+        // After this we can do three streams, but i suspect only two streams will be necessary
+        // 1.  elevation and temperature stream
+        // 2.  the precipitation stream
+        // these come back together for syncronous generation of snow and rivers
+        // then we can resplit for habitats and fish
         // ocean percentage - hill percentage together
         UpdateOceanAndHillPercents();
         // Generate River numbers that require hillPercents and elevations
