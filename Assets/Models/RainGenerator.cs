@@ -195,15 +195,15 @@ public class RainGenerator {
             nextNum = arrayNum + 1;
         }
 
-        return getHumidityFromArray(nextNum, remainder, x, z);
+        return getHumidityFromArray(arrayNum, nextNum, remainder, x, z);
     }
 
-    private double getHumidityFromArray(int arrayNum, int remainder, int x, int z)
+    private double getHumidityFromArray(int arrayNum, int nextNum, int remainder, int x, int z)
     {
         // Use the linear equation formula to find today's humidity
-        // Is this formula correct???
-        // will save time to simplify the formula:  humidity - humidity * (remainder / NumofDays) + humidity => (2 + (remainder / NumofDays)) * humidity
-        double humidity = (world[x, z].getHumidity().getSegment(arrayNum) - world[x, z].getHumidity().getSegment(arrayNum)) * (remainder / DAYS_PER_HUMIDITY_ARRAY_NUM) + world[x, z].getHumidity().getSegment(arrayNum);
+        double currentSegment = world[x, z].getHumidity().getSegment(arrayNum);
+        double nextSegment = world[x, z].getHumidity().getSegment(nextNum);
+        double humidity = (nextSegment - currentSegment) * (remainder / DAYS_PER_HUMIDITY_ARRAY_NUM) + currentSegment;
         // Modify it for balance purposes
         humidity = Math.Round(Math.Sqrt(10f * humidity), ROUNDED_TO);
         return humidity;

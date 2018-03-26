@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class WorldTests {
 
@@ -103,13 +104,19 @@ public class WorldTests {
         Tile[,] worldArray = World.getWorld().getWorldArray();
         Stopwatch sw = Stopwatch.StartNew();
         sw.Start();
-        for (int day = 0; day < World.DAYS_PER_YEAR; day++)
-        {
-            RainGenerator.getInstance().GenerateWorldsDayOfRain(day);
-        }
+        double[][][,] rainHistory = new double[2][][,];
+        // for (int year = 0; year < 1; year++)
+        // {
+            rainHistory[0] = aysncStoreAndGenerateRainYear(0).Result;
+        // }
         sw.Stop();
         UnityEngine.Debug.Log("Generation of an entire year's worth of rain " + World.X + ", " + World.Z + " took " + sw.Elapsed + " secs.");
         UnityEngine.Debug.Log("Note: World Size will have an effect on the time run of this method.");
+    }
+
+    async Task<double[][,]> aysncStoreAndGenerateRainYear(int year)
+    {
+        return await Task.Run(() => calculateYearOfRain(year));
     }
 
     // PRIVATE METHODS
@@ -135,6 +142,16 @@ public class WorldTests {
                 Assert.LessOrEqual(layer[i, j], 40.0);
             }
         }
+    }
+
+    private double[][,] calculateYearOfRain(int year)
+    {
+        double[][,] allRainDays = new double[World.DAYS_PER_YEAR][,];
+        for (int day = 0; day < World.DAYS_PER_YEAR; day++)
+        {
+            allRainDays[day] = RainGenerator.getInstance().GenerateWorldsDayOfRain(day);
+        }
+        return allRainDays;
     }
 
 }
